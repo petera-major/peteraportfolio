@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=VT323&family=Special+Elite&display=swap');
+
+:root {
+  --red: #CC0000;
+  --darkred: #880000;
+  --bg: #080808;
+  --surface: #0d0505;
+  --border: #1a0a0a;
+  --text: #e8e0d0;
+  --muted: #666666;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Special Elite', serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #CC000044;
+  color: #e8e0d0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: #CC000066; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #CC0000; }
+
+.font-vt323 { font-family: 'VT323', monospace; }
+.font-baskerville { font-family: 'Libre Baskerville', serif; }
+
+/* Glow text */
+.text-glow {
+  text-shadow: 0 0 20px rgba(204,0,0,0.4), 0 0 40px rgba(136,0,0,0.2);
+}
+
+/* Scan line effect */
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.15) 2px,
+    rgba(0,0,0,0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* CRT flicker on load */
+@keyframes crtOn {
+  0% { opacity: 0; transform: scaleY(0.01); }
+  5% { opacity: 1; transform: scaleY(1); }
+  6% { opacity: 0.8; }
+  8% { opacity: 1; }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+
+.crt-on {
+  animation: crtOn 0.6s ease-out forwards;
+}
